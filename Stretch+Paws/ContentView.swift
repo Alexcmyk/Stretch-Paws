@@ -9,8 +9,17 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        NavigationView {
+            List {
+                NavigationLink(destination: DetailView()) {
+                    Text("Downward-facing Dog")
+                }
+                Text("Standing Forward fold")
+                Text("Tree Pose")
+            }
+            .listStyle(.grouped)
+            .navigationBarTitle("Stretch + Paws")
+        }
     }
 }
 
