@@ -11,6 +11,8 @@ struct DetailView: View {
     
     let pose: Pose
     
+    @State private var timerOpen = false
+    
     var body: some View {
         ZStack {
             Color("Secondary").ignoresSafeArea()
@@ -43,7 +45,9 @@ struct DetailView: View {
                     }
                 }.padding(.horizontal, 20)
             }
-            TimerPanelView()
+            TimerPanelView(timerOpen: $timerOpen)
+        }.onTapGesture {
+            timerOpen = false
         }
     }
 }
@@ -62,6 +66,9 @@ struct DetailView_Previews: PreviewProvider {
 }
 
 struct TimerPanelView: View {
+    
+    @Binding var timerOpen: Bool
+    
     var body: some View {
         
         // If the timer panel is closed, show the closed timer view
@@ -70,14 +77,19 @@ struct TimerPanelView: View {
         
         VStack {
             Spacer()
-            Text("Try it out")
-                .foregroundColor(Color("Secondary"))
-                .fontWeight(.bold)
-                .padding(40)
-                .frame(maxWidth: .infinity, maxHeight: 80)
+            VStack {
+                timerOpen ? AnyView(TimerOpenView()) : AnyView(TimerClosedView())
+            }
+            .foregroundColor(Color("Secondary"))
+            .frame(maxWidth: .infinity, maxHeight: timerOpen ? 200 : 80)
             .background(Color("Highlight"))
             .cornerRadius(6)
-        }.ignoresSafeArea()
+            
+        }
+        .ignoresSafeArea()
+        .onTapGesture {
+            timerOpen.toggle()
+        }
     }
 }
 
@@ -85,5 +97,13 @@ struct TimerPanelView: View {
 struct TimerOpenView: View {
     var body: some View {
         Text("hold that pose")
+            .fontWeight(.bold)
+    }
+}
+
+struct TimerClosedView: View {
+    var body: some View {
+        Text("Try it out")
+            .fontWeight(.bold)
     }
 }
