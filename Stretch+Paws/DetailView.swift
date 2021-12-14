@@ -43,7 +43,7 @@ struct DetailView: View {
                     }
                 }.padding(.horizontal, 20)
             }
-            
+            TimerPanelView()
         }
     }
 }
@@ -58,5 +58,32 @@ struct DetailView_Previews: PreviewProvider {
             "Did someone say dog? Can't we call this a downward-facing cat instead? It's OK – this is a friendly dog, it's not interested in chasing cats. In fact, Downward-Facing Dog is the lynchpin of a yoga asana practice: if you're going to befriend with any of these poses, make sure it's this canine classic.",
             steps: ["From a kneeling position, place your hands shoulder-distance apart and spread your fingers.", "Tuck your toes and lift your hips up towards the ceiling so you create an inverted V shape.", "Balance the weight between hands and feet and think about tilting your tailbone up towards the ceiling.","Send your gaze towards your feet and breath!"],
             topTip: "Bend your knees in order to create more length through the spine." ))
+    }
+}
+
+struct TimerPanelView: View {
+    var body: some View {
+        
+        // If the timer panel is closed, show the closed timer view
+        // If the timer panel is open, show the timer open view
+        
+        
+        VStack {
+            Spacer()
+            Text("Try it out")
+                .foregroundColor(Color("Secondary"))
+                .fontWeight(.bold)
+                .padding(40)
+                .frame(maxWidth: .infinity, maxHeight: 80)
+            .background(Color("Highlight"))
+            .cornerRadius(6)
+        }.ignoresSafeArea()
+    }
+}
+
+
+struct TimerOpenView: View {
+    var body: some View {
+        Text("hold that pose")
     }
 }
